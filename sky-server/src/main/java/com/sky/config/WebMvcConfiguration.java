@@ -44,7 +44,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     @Bean
     public Docket docket() {
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("苍穹外卖项目接口文档")
+                .title("外卖管理系统接口文档")
                 .version("2.0")
                 .description("苍穹外卖项目接口文档")
                 .build();
@@ -57,6 +57,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         return docket;
     }
 
+
     /**
      * 设置静态资源映射
      * @param registry
@@ -65,4 +66,5 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
+
 }
