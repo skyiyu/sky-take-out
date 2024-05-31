@@ -1,10 +1,13 @@
 package com.sky.controller.admin;
 
+import com.github.pagehelper.Page;
 import com.sky.constant.JwtClaimsConstant;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
+import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
 import com.sky.properties.JwtProperties;
+import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.EmployeeService;
 import com.sky.utils.JwtUtil;
@@ -22,7 +25,7 @@ import java.util.Map;
  * 员工管理
  */
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/admin/employee")
 @Slf4j
 @Api(tags = "员工相关接口")
 public class EmployeeController {
@@ -74,11 +77,24 @@ public class EmployeeController {
         return Result.success();
     }
 
-    @PostMapping("/employee")
+    @PostMapping
     @ApiOperation("新增员工 ")
     public Result save(@RequestBody EmployeeDTO employeeDTO){
         log.info("新增员工：{}",employeeDTO);
         employeeService.save(employeeDTO);
         return Result.success();
+    }
+
+    /**
+     * 员工分页查询
+     * @param pageQueryDTO
+     * @return
+     */
+    @GetMapping("/page")
+    @ApiOperation("员工分页查询")
+    public Result<PageResult> page(EmployeePageQueryDTO pageQueryDTO){
+        log.info("员工分页查询，参数为：{}",pageQueryDTO);
+        PageResult pageResult= employeeService.pageQuery(pageQueryDTO);
+        return Result.success(pageResult);
     }
 }
