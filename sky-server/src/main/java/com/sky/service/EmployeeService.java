@@ -27,4 +27,6 @@ public interface EmployeeService {
      * @return
      */
     PageResult pageQuery(EmployeePageQueryDTO pageQueryDTO);
+
+    void startOrStop(Integer status, Long id);
 }
